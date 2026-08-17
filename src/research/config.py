@@ -46,10 +46,12 @@ class Config:
     openai_key: str | None
     gemini_key: str | None
     openrouter_key: str | None
+    groq_key: str | None
+    cerebras_key: str | None
     composio_key: str | None
     extract_provider: str   # "google" (Gemini) | "anthropic"
     extract_model: str
-    critic_provider: str    # "openrouter" | "openai" | "google"
+    critic_provider: str    # "groq" | "cerebras" | "openrouter" | "openai" | "google"
     critic_model: str
 
     def require(self, attr: str, human_name: str) -> str:
@@ -82,10 +84,13 @@ def get_config() -> Config:
         openai_key=_pick(env, "openai_api_key"),
         gemini_key=_pick(env, "gemini_api_key"),
         openrouter_key=_pick(env, "openrouter_api_key"),
+        groq_key=_pick(env, "groq_api_key"),
+        cerebras_key=_pick(env, "cerebras_api_key"),
         composio_key=_pick(env, "composio_api", "composio_api_key"),
-        # This run: extractor = Gemini, critic = OpenRouter (a different vendor).
+        # This run: extractor = Gemini; critic = Groq (gpt-oss, a different model family,
+        # free and working — OpenRouter has no balance). Both are overridable via env.
         extract_provider=env.get("extract_provider", "google").lower(),
         extract_model=env.get("extract_model") or env.get("gemini_model", "gemini-flash-latest"),
-        critic_provider=env.get("critic_provider", "openrouter").lower(),
-        critic_model=env.get("critic_model", "openai/gpt-4o"),
+        critic_provider=env.get("critic_provider", "groq").lower(),
+        critic_model=env.get("critic_model", "openai/gpt-oss-120b"),
     )

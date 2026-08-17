@@ -74,17 +74,22 @@ def critique(record: dict, docs: list[dict]) -> list[dict]:
     return _critique_openai_compatible(cfg, record, docs)
 
 
+# provider -> (base_url, key attribute). All are OpenAI-compatible; only these two differ.
+# Any of them is a different model family than the Gemini extractor, so the critic stays
+# independent (CLAUDE.md §4). Groq/Cerebras run gpt-oss for free and fast.
+_OAI_ENDPOINTS = {
+    "groq": ("https://api.groq.com/openai/v1", "groq_key", "GROQ_API_KEY"),
+    "cerebras": ("https://api.cerebras.ai/v1", "cerebras_key", "CEREBRAS_API_KEY"),
+    "openrouter": ("https://openrouter.ai/api/v1", "openrouter_key", "OPENROUTER_API_KEY"),
+    "openai": (None, "openai_key", "OPENAI_API_KEY"),
+}
+
+
 def _critique_openai_compatible(cfg, record: dict, docs: list[dict]) -> list[dict]:
-    """OpenRouter (default) and OpenAI share the OpenAI SDK; only base_url + key differ.
-    OpenRouter proxies to a different vendor than the Gemini extractor, satisfying the
-    'independent critic' requirement (CLAUDE.md §4)."""
     from openai import OpenAI
 
-    if cfg.critic_provider == "openrouter":
-        client = OpenAI(api_key=cfg.require("openrouter_key", "OPENROUTER_API_KEY"),
-                        base_url="https://openrouter.ai/api/v1")
-    else:
-        client = OpenAI(api_key=cfg.require("openai_key", "OPENAI_API_KEY"))
+    base_url, key_attr, key_name = _OAI_ENDPOINTS.get(cfg.critic_provider, _OAI_ENDPOINTS["groq"])
+    client = OpenAI(api_key=cfg.require(key_attr, key_name), base_url=base_url)
     resp = client.chat.completions.create(
         model=cfg.critic_model,
         max_tokens=900,  # keep well inside a small OpenRouter balance

@@ -168,8 +168,10 @@ def _is_transient(e: Exception) -> bool:
     return any(t in str(e) for t in _TRANSIENT)
 
 
-# If the configured model spikes to 503, fall through to these (probed as reliable).
-FALLBACK_MODELS = ["gemini-2.5-flash", "gemini-3.5-flash"]
+# Fallback chain across models with independent free-tier quota buckets. The `-flash-lite`
+# variants have their own daily quota, so they keep working after the `-flash` bucket is spent.
+FALLBACK_MODELS = ["gemini-2.5-flash-lite", "gemini-3.5-flash-lite", "gemini-flash-lite-latest",
+                   "gemini-2.5-flash", "gemini-3.5-flash"]
 
 
 @retry(

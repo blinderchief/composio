@@ -151,9 +151,11 @@ def run_verify(run: str = "latest", app: str | None = None, use_critic: bool = T
     critic_file = rd / "critic.jsonl"
     already = done_slugs(out)
 
-    critic_available = use_critic and (
-        cfg.openai_key if cfg.critic_provider == "openai" else cfg.gemini_key
-    )
+    _critic_key = {
+        "groq": cfg.groq_key, "cerebras": cfg.cerebras_key, "openrouter": cfg.openrouter_key,
+        "openai": cfg.openai_key, "google": cfg.gemini_key,
+    }.get(cfg.critic_provider)
+    critic_available = bool(use_critic and _critic_key)
     browser_needed: list[str] = []
 
     with httpx.Client() as client:
