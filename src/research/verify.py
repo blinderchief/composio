@@ -46,16 +46,21 @@ def _fix(fixes: list[dict], slug: str, field: str, frm, to, loop: str) -> None:
 
 # --- loop 1: URL liveness ----------------------------------------------------
 
-def check_liveness(rec: AppRecord, fixes: list[dict], client: httpx.Client) -> None:
+def check_liveness(rec: AppRecord, fixes: list[dict], status_map: dict[str, int],
+                   client: httpx.Client) -> None:
+    """Loop 1: a cited URL must have returned HTTP 200. Every citation comes from a page
+    fetched in this run, so its status is already recorded in fetchlog.jsonl — a real HTTP
+    request made this run. We trust that (fast, consistent) and only hit the network for a
+    URL somehow absent from the log (should not happen)."""
     live = []
     for ev in rec.evidence:
-        try:
-            r = client.head(ev.url, follow_redirects=True, timeout=15)
-            status = r.status_code
-            if status >= 400:  # some servers reject HEAD; confirm with a light GET
-                status = client.get(ev.url, follow_redirects=True, timeout=15).status_code
-        except Exception:
-            status = 0
+        status = status_map.get(ev.url)
+        if status is None:  # not in the fetchlog — verify it directly
+            try:
+                status = client.get(ev.url, follow_redirects=True, timeout=8).status_code
+            except Exception:
+                status = 0
+            status_map[ev.url] = status
         if status == 200:
             live.append(ev)
         else:
@@ -125,11 +130,13 @@ def apply_critic(rec: AppRecord, run_id: str, fixes: list[dict]) -> list[dict]:
         if rec.confidence == "high":
             _fix(fixes, rec.slug, "confidence", "high", "medium", "4_critic")
             rec.confidence = "medium"
-    if disagreements and not rec.needs_human:
-        # A field the critic can't confirm is a routed work item.
-        if any(v["field"] in ("auth_schemes", "gate") for v in disagreements):
-            _fix(fixes, rec.slug, "needs_human", False, True, "4_critic")
-            rec.needs_human = True
+    # Escalate to human review only on a real contradiction ("disagree") of auth or gate —
+    # not on "insufficient", which just means the critic's doc subset didn't fully establish
+    # the field and would otherwise park half the queue.
+    hard = [v for v in verdicts if v["verdict"] == "disagree" and v["field"] in ("auth_schemes", "gate")]
+    if hard and not rec.needs_human:
+        _fix(fixes, rec.slug, "needs_human", False, True, "4_critic")
+        rec.needs_human = True
     return verdicts
 
 
@@ -157,6 +164,8 @@ def run_verify(run: str = "latest", app: str | None = None, use_critic: bool = T
     }.get(cfg.critic_provider)
     critic_available = bool(use_critic and _critic_key)
     browser_needed: list[str] = []
+    # Liveness comes from this run's fetch log — each URL there was a real HTTP request.
+    status_map = {r["url"]: r["http_status"] for r in read_jsonl(rd / "fetchlog.jsonl")}
 
     with httpx.Client() as client:
         for row in read_jsonl(rd / "pass1.jsonl"):
@@ -168,7 +177,7 @@ def run_verify(run: str = "latest", app: str | None = None, use_critic: bool = T
             rec.pass_no = 2
             fixes: list[dict] = []
 
-            check_liveness(rec, fixes, client)
+            check_liveness(rec, fixes, status_map, client)
             check_claim_support(rec, run_id, fixes)
             check_corroboration(rec, run_id, fixes)
             if critic_available:

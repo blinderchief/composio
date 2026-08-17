@@ -25,7 +25,8 @@ from .seed import seed_by_slug
 
 log = get_logger(stage="extract")
 
-MAX_DOC_CHARS = 12_000  # per-doc truncation to keep the context bounded and cheap
+MAX_DOC_CHARS = 4_500  # per-doc truncation to keep the context bounded, fast, and cheap
+MAX_DOCS = 3           # cap docs per app so free-tier token budgets are respected
 
 AUTH_ENUM = ["OAUTH2", "API_KEY", "BEARER_TOKEN", "BASIC", "NO_AUTH", "UNKNOWN"]
 GATE_ENUM = ["self_serve", "paid_tier", "admin_approval", "business_verify",
@@ -102,10 +103,28 @@ def _gemini_schema(doc_ids: list[str]) -> dict:
     }
 
 
-def _context(app_name: str, category: str, hint: str, docs: list[dict]) -> str:
-    parts = [f"APP: {app_name}\nCATEGORY: {category}\nASSIGNMENT HINT URL: {hint}\n"]
+def _context(app_name: str, category: str, hint: str, docs: list[dict],
+             is_trap: bool = False, trap_note: str | None = None) -> str:
+    parts = [f"APP: {app_name}\nCATEGORY: {category}\nHINT URL: {hint}\n"]
+    # Use what the seed already knows. A github.com hint usually means a local tool/library,
+    # not a hosted API — check for a real service before assigning auth. A trap flag means the
+    # name may collide with a different company, so the fetched docs might describe the wrong one.
+    if "github.com" in hint:
+        parts.append(
+            "\n[NOTE: the hint URL is a GitHub repo. This is often a CLI or library that runs "
+            "locally with NO hosted API and NO credentials. If so: auth_schemes=[NO_AUTH], "
+            "gate=no_api, buildability=not_a_toolkit. Do not invent an API.]")
+    if is_trap:
+        parts.append(
+            f"\n[CAUTION: this entity is flagged as ambiguous/name-colliding ({trap_note}). "
+            "The fetched documents may describe a DIFFERENT company with the same name. If you "
+            "cannot confirm from the hint domain that the docs are about THIS entity, abstain: "
+            "set the uncertain fields to unknown/UNKNOWN, needs_human=true, and explain the "
+            "collision in ambiguity_note. A documented abstention is the correct answer here.]")
     if not docs:
         parts.append("\n[No documents were fetched. You must abstain: mark unknown.]")
+    # Vendor-domain docs first, then cap — they carry the authoritative answer.
+    docs = sorted(docs, key=lambda d: not d["vendor_domain"])[:MAX_DOCS]
     for d in docs:
         tag = "VENDOR DOMAIN" if d["vendor_domain"] else "third-party"
         parts.append(
@@ -199,7 +218,11 @@ def _gemini_once(cfg, model: str, ctx: str, doc_ids: list[str], retry_note: str)
 
 
 def _call_gemini(cfg, ctx: str, doc_ids: list[str], retry_note: str = "") -> dict:
-    models = [cfg.extract_model] + [m for m in FALLBACK_MODELS if m != cfg.extract_model]
+    # Only ever send Gemini models to the Gemini endpoint. When the extractor is configured
+    # as an OSS model (Cerebras/Groq) and the chain falls through to Gemini, cfg.extract_model
+    # is not a Gemini id, so fall back to the Gemini model list instead of 404-ing.
+    primary = [cfg.extract_model] if cfg.extract_model.startswith("gemini") else []
+    models = primary + [m for m in FALLBACK_MODELS if m not in primary]
     last: Exception | None = None
     for m in models:
         try:
@@ -231,17 +254,82 @@ def _call_anthropic(cfg, ctx: str, doc_ids: list[str], retry_note: str = "") -> 
     return block.input
 
 
+_OAI_EXTRACT = {  # provider -> (base_url, key_attr, key_name)
+    "cerebras": ("https://api.cerebras.ai/v1", "cerebras_key", "CEREBRAS_API_KEY"),
+    "groq": ("https://api.groq.com/openai/v1", "groq_key", "GROQ_API_KEY"),
+}
+
+
+def _json_schema_text(doc_ids: list[str]) -> str:
+    return (
+        "Output ONLY a JSON object with these keys (no prose):\n"
+        f'one_liner (str<=140), auth_schemes (array of {AUTH_ENUM}), auth_notes (str|null), '
+        f'gate (one of {GATE_ENUM}), gate_detail (str|null), gate_apply_url (str|null), '
+        'gate_requires (array of str), gate_eta_days ([min,max] ints | null), '
+        f'api_style (array of {STYLE_ENUM}), api_breadth (one of {BREADTH_ENUM}), '
+        f'api_docs_url (str|null), mcp (one of {MCP_ENUM}), mcp_url (str|null), '
+        f'buildability (one of {BUILD_ENUM}), primary_blocker (str|null), '
+        f'confidence (one of {CONF_ENUM}), status (one of {STATUS_ENUM}), '
+        'needs_human (bool), ambiguity_note (str|null), '
+        'evidence (array of {doc_id, quote_span<=25 words verbatim, supports one of '
+        f'{SUPPORTS_ENUM}}}). Each evidence.doc_id MUST be one of: {doc_ids or ["__none__"]}.'
+    )
+
+
+def _call_oai_compatible(cfg, provider: str, model: str, ctx: str, doc_ids: list[str],
+                         retry_note: str = "") -> dict:
+    from openai import OpenAI
+
+    base_url, key_attr, key_name = _OAI_EXTRACT[provider]
+    client = OpenAI(api_key=cfg.require(key_attr, key_name), base_url=base_url)
+    resp = client.chat.completions.create(
+        model=model, temperature=0, max_tokens=3000,
+        messages=[
+            {"role": "system", "content": SYSTEM + "\n\n" + _json_schema_text(doc_ids)},
+            {"role": "user", "content": ctx + (f"\n\n[Fix: {retry_note}]" if retry_note else "")},
+        ],
+        response_format={"type": "json_object"},
+    )
+    return json.loads(resp.choices[0].message.content)
+
+
+def _provider_chain(cfg) -> list:
+    """(name, callable) chain. The configured extractor first, then the others as fallbacks,
+    so a single provider's daily quota wall doesn't stall the run. gpt-oss-120b on both
+    Cerebras and Groq keeps the model consistent; Gemini is the last resort."""
+    oss = [
+        ("cerebras", lambda c, x, ids, n="": _call_oai_compatible(c, "cerebras", "gpt-oss-120b", x, ids, n)),
+        ("groq", lambda c, x, ids, n="": _call_oai_compatible(c, "groq", "openai/gpt-oss-120b", x, ids, n)),
+        ("gemini", _call_gemini),
+    ]
+    if cfg.extract_provider == "groq":
+        oss = [oss[1], oss[0], oss[2]]
+    elif cfg.extract_provider in ("google", "anthropic"):
+        oss = [("gemini", _call_gemini), oss[0], oss[1]]
+    return oss
+
+
 def extract_app(cfg, app, run_id: str) -> AppRecord:
     docs = load_docs_for_slug(run_id, app.slug)
     cat = catalog_map().get(app.slug, {})
     doc_ids = [d["doc_id"] for d in docs]
-    ctx = _context(app.name, app.category, app.hint_url, docs)
-    call = _call_gemini if cfg.extract_provider == "google" else _call_anthropic
+    ctx = _context(app.name, app.category, app.hint_url, docs,
+                   getattr(app, "is_trap", False), getattr(app, "trap_note", None))
+    chain = _provider_chain(cfg)
 
     last_err = ""
     for attempt in range(2):  # validate-and-retry net (CLAUDE.md §4)
+        raw = None
+        for name, call in chain:  # provider fallback: skip a provider that's out of quota
+            try:
+                raw = call(cfg, ctx, doc_ids, last_err)
+                break
+            except Exception as e:
+                last_err = str(e)[:160]
+                log.warning("provider_fallback", slug=app.slug, provider=name, error=last_err)
         try:
-            raw = call(cfg, ctx, doc_ids, last_err)
+            if raw is None:
+                raise RuntimeError(last_err or "all providers failed")
             rec = _to_record(raw, app, run_id, docs, cat)
         except Exception as e:
             last_err = str(e)[:200]

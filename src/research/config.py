@@ -87,10 +87,14 @@ def get_config() -> Config:
         groq_key=_pick(env, "groq_api_key"),
         cerebras_key=_pick(env, "cerebras_api_key"),
         composio_key=_pick(env, "composio_api", "composio_api_key"),
-        # This run: extractor = Gemini; critic = Groq (gpt-oss, a different model family,
-        # free and working — OpenRouter has no balance). Both are overridable via env.
+        # This run: extractor = Gemini; critic = Cerebras gpt-oss-120b (a different model
+        # family, free, and very fast). Groq runs the same model but with high reasoning
+        # latency; Cerebras is the speed provider. All overridable via env.
         extract_provider=env.get("extract_provider", "google").lower(),
         extract_model=env.get("extract_model") or env.get("gemini_model", "gemini-flash-latest"),
-        critic_provider=env.get("critic_provider", "groq").lower(),
-        critic_model=env.get("critic_model", "openai/gpt-oss-120b"),
+        critic_provider=env.get("critic_provider", "cerebras").lower(),
+        critic_model=env.get("critic_model") or (
+            "gpt-oss-120b" if env.get("critic_provider", "cerebras").lower() == "cerebras"
+            else "openai/gpt-oss-120b"
+        ),
     )

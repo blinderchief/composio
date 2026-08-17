@@ -12,6 +12,8 @@ from __future__ import annotations
 
 import json
 
+from tenacity import retry, retry_if_exception, stop_after_attempt, wait_exponential
+
 from .config import get_config
 from .logging_setup import get_logger
 
@@ -85,6 +87,12 @@ _OAI_ENDPOINTS = {
 }
 
 
+@retry(  # Groq/Cerebras free tiers rate-limit (~30 req/min); back off and retry on 429.
+    retry=retry_if_exception(lambda e: "429" in str(e) or "rate" in str(e).lower()),
+    wait=wait_exponential(multiplier=2, min=3, max=30),
+    stop=stop_after_attempt(4),
+    reraise=True,
+)
 def _critique_openai_compatible(cfg, record: dict, docs: list[dict]) -> list[dict]:
     from openai import OpenAI
 

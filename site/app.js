@@ -206,7 +206,8 @@
       '<h3 style="font-size:16px;margin-top:18px">Abstention quality</h3><p class="small">' +
       (ab2.quality != null ? "<strong>" + pct(ab2.quality) + "</strong> of the pipeline's abstentions were <em>good</em> — it declined exactly where the gold label is also unknown (" + ab2.good_unknown + " good, " + ab2.bad_unknown + " bad). Abstaining correctly beats guessing correctly." : "appears once scored rows include abstentions.") +
       "</p></div></div>" +
-      '<div class="callout" style="margin-top:18px">' + esc(acc.interval_caveat || "") + "</div>" +
+      (acc.delta_note ? '<div class="callout warn" style="margin-top:18px">' + esc(acc.delta_note) + "</div>" : "") +
+      '<div class="callout" style="margin-top:12px">' + esc(acc.interval_caveat || "") + "</div>" +
       (acc.method_note ? '<div class="callout" style="margin-top:12px">' + esc(acc.method_note) + "</div>" : "");
   }
 

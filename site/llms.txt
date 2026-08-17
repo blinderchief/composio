@@ -2,14 +2,14 @@
 
 Agentic research over 100 SaaS apps for Composio toolkit buildability, with a prioritized build-and-outreach queue and honest, gold-scored accuracy.
 
-Status: partial (90/100) (run run-100).
+Status: complete (run run-100).
 
 ## Headline
-- 90 apps audited; 46 already Composio toolkits (lower bound (partial catalog source)).
-- 68 can ship this week with zero approvals.
-- 3 need outreach/approval — start those now (long lead times).
-- 0 are not toolkits (no API / wrong shape).
-- 9 routed to human review; 52 have first-party MCP.
+- 100 apps audited; 51 already Composio toolkits (lower bound (partial catalog source)).
+- 66 can ship this week with zero approvals.
+- 6 need outreach/approval — start those now (long lead times).
+- 2 are not toolkits (no API / wrong shape).
+- 20 routed to human review; 65 have first-party MCP.
 
 ## Machine-readable
 - Full dataset: ./data.json

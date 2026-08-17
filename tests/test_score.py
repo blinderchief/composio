@@ -38,7 +38,8 @@ def test_scoring_and_abstention_quality():
          "mcp": "unknown", "composio_toolkit": "unknown", "buildability": "unknown"},
     ]
     records = {
-        "a": _rec("a", ["API_KEY"], "self_serve"),                 # perfect row
+        # auth is scored on overlap: [OAUTH2, API_KEY] still matches gold [API_KEY]
+        "a": _rec("a", ["OAUTH2", "API_KEY"], "self_serve"),
         "trap": _rec("trap", ["UNKNOWN"], "unknown", "unknown", "unknown", "unknown"),  # good unknown
     }
     out = _score_pass(records, gold, pop=100)
