@@ -8,6 +8,8 @@ artifact a connector-operations team actually works from.
 - **Live page:** [Site](https://composio-five.vercel.app/)
 - **Machine-readable:** `/data.json` · `/llms.txt` · JSON-LD in the page `<head>`
 - **One command:** `make run`
+- **Build log:** [`PROCESS.md`](PROCESS.md) — the honest history of how this was built, including
+  every model that failed and how accuracy went from 15% to 40%.
 
 The idea in one line: **a buildability verdict is knowledge; a queue that says *what to do,
 where to apply, and when to start* is work.** So the output is the queue.
@@ -147,6 +149,7 @@ gold/           gold_set.yaml · NOTES.md
 site/           index.html · app.js · data.json · llms.txt · vercel.json
 proof/          composio_mcp.py
 tests/          schema · Wilson math · verify loops · queue lanes · sampler
+PROCESS.md      build log — the honest history, failures included
 ```
 
 Every claim on the page traces to `data.json`; every citation was fetched and re-validated.
