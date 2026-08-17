@@ -5,7 +5,7 @@ own answers** against fetched vendor docs, **measures its accuracy** against an 
 verified gold set, and outputs not a table but a **prioritized build-and-outreach queue** — the
 artifact a connector-operations team actually works from.
 
-- **Live page:** _(your Vercel URL — see [Deploy to Vercel](#deploy-to-vercel))_
+- **Live page:** [Site](https://composio-five.vercel.app/)
 - **Machine-readable:** `/data.json` · `/llms.txt` · JSON-LD in the page `<head>`
 - **One command:** `make run`
 
