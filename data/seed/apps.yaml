@@ -1,0 +1,115 @@
+# The 100, verbatim from the assignment (Assignmentmd §"The 100 apps").
+# category + hint_url are given; slug is a normalized id used everywhere downstream.
+# is_trap flags entries the GOLD_SET dossier (§3) marks ambiguous / name-colliding /
+# wrong-shape. Flagging here does NOT prejudge the answer — it routes extra scrutiny.
+# This file is hand-authored data. The pipeline consumes it; it never re-derives it.
+
+- {slug: salesforce, name: Salesforce, category: CRM and Sales, hint_url: "https://salesforce.com"}
+- {slug: hubspot, name: HubSpot, category: CRM and Sales, hint_url: "https://hubspot.com"}
+- {slug: pipedrive, name: Pipedrive, category: CRM and Sales, hint_url: "https://pipedrive.com"}
+- {slug: attio, name: Attio, category: CRM and Sales, hint_url: "https://attio.com"}
+- {slug: twenty, name: Twenty, category: CRM and Sales, hint_url: "https://twenty.com"}
+- {slug: podio, name: Podio, category: CRM and Sales, hint_url: "https://podio.com"}
+- {slug: zoho-crm, name: Zoho CRM, category: CRM and Sales, hint_url: "https://zoho.com/crm"}
+- {slug: close, name: Close, category: CRM and Sales, hint_url: "https://close.com"}
+- {slug: copper, name: Copper, category: CRM and Sales, hint_url: "https://copper.com"}
+- {slug: dealcloud, name: DealCloud, category: CRM and Sales, hint_url: "https://api.docs.dealcloud.com"}
+
+- {slug: zendesk, name: Zendesk, category: Support and Helpdesk, hint_url: "https://zendesk.com"}
+- {slug: intercom, name: Intercom, category: Support and Helpdesk, hint_url: "https://intercom.com"}
+- {slug: freshdesk, name: Freshdesk, category: Support and Helpdesk, hint_url: "https://freshdesk.com"}
+- {slug: front, name: Front, category: Support and Helpdesk, hint_url: "https://front.com"}
+- {slug: pylon, name: Pylon, category: Support and Helpdesk, hint_url: "https://usepylon.com", is_trap: true, trap_note: "Name collision: usepylon.com (support) vs unrelated pylonapi.com. Assignment URL fixes the entity."}
+- {slug: liveagent, name: LiveAgent, category: Support and Helpdesk, hint_url: "https://liveagent.com"}
+- {slug: plain, name: Plain, category: Support and Helpdesk, hint_url: "https://plain.com"}
+- {slug: help-scout, name: Help Scout, category: Support and Helpdesk, hint_url: "https://helpscout.com"}
+- {slug: gorgias, name: Gorgias, category: Support and Helpdesk, hint_url: "https://gorgias.com"}
+- {slug: gladly, name: Gladly, category: Support and Helpdesk, hint_url: "https://gladly.com"}
+
+- {slug: slack, name: Slack, category: Communications and Messaging, hint_url: "https://slack.com"}
+- {slug: twilio, name: Twilio, category: Communications and Messaging, hint_url: "https://twilio.com"}
+- {slug: zoho-cliq, name: Zoho Cliq, category: Communications and Messaging, hint_url: "https://zoho.com/cliq"}
+- {slug: lark, name: Lark (Larksuite), category: Communications and Messaging, hint_url: "https://open.larksuite.com"}
+- {slug: pumble, name: Pumble, category: Communications and Messaging, hint_url: "https://pumble.com"}
+- {slug: discord, name: Discord, category: Communications and Messaging, hint_url: "https://discord.com"}
+- {slug: telegram, name: Telegram, category: Communications and Messaging, hint_url: "https://core.telegram.org"}
+- {slug: whatsapp-business, name: WhatsApp Business, category: Communications and Messaging, hint_url: "https://developers.facebook.com/docs/whatsapp"}
+- {slug: aircall, name: Aircall, category: Communications and Messaging, hint_url: "https://aircall.io"}
+- {slug: vonage, name: Vonage, category: Communications and Messaging, hint_url: "https://developer.vonage.com"}
+
+- {slug: google-ads, name: Google Ads, category: Marketing Ads Email and Social, hint_url: "https://developers.google.com/google-ads"}
+- {slug: meta-ads, name: Meta Ads, category: Marketing Ads Email and Social, hint_url: "https://developers.facebook.com/docs/marketing-apis"}
+- {slug: linkedin-ads, name: LinkedIn Ads, category: Marketing Ads Email and Social, hint_url: "https://learn.microsoft.com/linkedin/marketing"}
+- {slug: gohighlevel, name: GoHighLevel, category: Marketing Ads Email and Social, hint_url: "https://highlevel.stoplight.io"}
+- {slug: mailchimp, name: Mailchimp, category: Marketing Ads Email and Social, hint_url: "https://mailchimp.com/developer"}
+- {slug: klaviyo, name: Klaviyo, category: Marketing Ads Email and Social, hint_url: "https://developers.klaviyo.com"}
+- {slug: systeme-io, name: "systeme.io", category: Marketing Ads Email and Social, hint_url: "https://systeme.io"}
+- {slug: pinterest, name: Pinterest, category: Marketing Ads Email and Social, hint_url: "https://developers.pinterest.com"}
+- {slug: threads, name: Threads (Meta), category: Marketing Ads Email and Social, hint_url: "https://developers.facebook.com/docs/threads"}
+- {slug: sendgrid, name: SendGrid, category: Marketing Ads Email and Social, hint_url: "https://sendgrid.com"}
+
+- {slug: shopify, name: Shopify, category: Ecommerce, hint_url: "https://shopify.dev"}
+- {slug: woocommerce, name: WooCommerce, category: Ecommerce, hint_url: "https://woocommerce.com/document/woocommerce-rest-api"}
+- {slug: bigcommerce, name: BigCommerce, category: Ecommerce, hint_url: "https://developer.bigcommerce.com"}
+- {slug: salesforce-commerce-cloud, name: Salesforce Commerce Cloud, category: Ecommerce, hint_url: "https://developer.salesforce.com/docs/commerce"}
+- {slug: magento, name: Magento (Adobe Commerce), category: Ecommerce, hint_url: "https://developer.adobe.com/commerce"}
+- {slug: squarespace, name: Squarespace, category: Ecommerce, hint_url: "https://developers.squarespace.com"}
+- {slug: ecwid, name: Ecwid, category: Ecommerce, hint_url: "https://api-docs.ecwid.com"}
+- {slug: gumroad, name: Gumroad, category: Ecommerce, hint_url: "https://gumroad.com/api"}
+- {slug: amazon-sp, name: Amazon Selling Partner, category: Ecommerce, hint_url: "https://developer-docs.amazon.com/sp-api"}
+- {slug: fanbasis, name: fanbasis, category: Ecommerce, hint_url: "https://fanbasis.com", is_trap: true, trap_note: "Multiple 'fanbasis'/'Fanbase' entities; the payments product may have rebranded (Commas). Establish current entity."}
+
+- {slug: dataforseo, name: DataForSEO, category: Data SEO and Scraping, hint_url: "https://docs.dataforseo.com"}
+- {slug: se-ranking, name: SE Ranking, category: Data SEO and Scraping, hint_url: "https://seranking.com/api"}
+- {slug: ahrefs, name: Ahrefs, category: Data SEO and Scraping, hint_url: "https://ahrefs.com/api"}
+- {slug: mrscraper, name: MrScraper, category: Data SEO and Scraping, hint_url: "https://docs.mrscraper.com"}
+- {slug: apify, name: Apify, category: Data SEO and Scraping, hint_url: "https://docs.apify.com"}
+- {slug: firecrawl, name: Firecrawl, category: Data SEO and Scraping, hint_url: "https://firecrawl.dev"}
+- {slug: bright-data, name: Bright Data, category: Data SEO and Scraping, hint_url: "https://brightdata.com"}
+- {slug: sherlock, name: Sherlock, category: Data SEO and Scraping, hint_url: "https://github.com/sherlock-project/sherlock", is_trap: true, trap_note: "Wrong-shape: local CLI that checks usernames across sites. No hosted API, no auth."}
+- {slug: waterfall-io, name: "Waterfall.io", category: Data SEO and Scraping, hint_url: "https://waterfall.io", is_trap: true, trap_note: "Obscure contact/company intel; little public developer documentation. Likely unverifiable."}
+- {slug: clay, name: Clay, category: Data SEO and Scraping, hint_url: "https://clay.com"}
+
+- {slug: github, name: GitHub, category: Developer Infra and Data, hint_url: "https://docs.github.com/rest"}
+- {slug: vercel, name: Vercel, category: Developer Infra and Data, hint_url: "https://vercel.com/docs/rest-api"}
+- {slug: netlify, name: Netlify, category: Developer Infra and Data, hint_url: "https://docs.netlify.com/api"}
+- {slug: cloudflare, name: Cloudflare, category: Developer Infra and Data, hint_url: "https://developers.cloudflare.com/api"}
+- {slug: supabase, name: Supabase, category: Developer Infra and Data, hint_url: "https://supabase.com/docs"}
+- {slug: neo4j, name: Neo4j, category: Developer Infra and Data, hint_url: "https://neo4j.com/docs/api"}
+- {slug: snowflake, name: Snowflake, category: Developer Infra and Data, hint_url: "https://docs.snowflake.com"}
+- {slug: mongodb-atlas, name: MongoDB Atlas, category: Developer Infra and Data, hint_url: "https://mongodb.com/docs/atlas/api"}
+- {slug: datadog, name: Datadog, category: Developer Infra and Data, hint_url: "https://docs.datadoghq.com/api"}
+- {slug: sentry, name: Sentry, category: Developer Infra and Data, hint_url: "https://docs.sentry.io/api"}
+
+- {slug: notion, name: Notion, category: Productivity and Project Management, hint_url: "https://developers.notion.com"}
+- {slug: airtable, name: Airtable, category: Productivity and Project Management, hint_url: "https://airtable.com/developers"}
+- {slug: linear, name: Linear, category: Productivity and Project Management, hint_url: "https://developers.linear.app"}
+- {slug: jira, name: Jira, category: Productivity and Project Management, hint_url: "https://developer.atlassian.com"}
+- {slug: asana, name: Asana, category: Productivity and Project Management, hint_url: "https://developers.asana.com"}
+- {slug: monday, name: Monday.com, category: Productivity and Project Management, hint_url: "https://developer.monday.com"}
+- {slug: clickup, name: ClickUp, category: Productivity and Project Management, hint_url: "https://clickup.com/api"}
+- {slug: coda, name: Coda, category: Productivity and Project Management, hint_url: "https://coda.io/developers"}
+- {slug: smartsheet, name: Smartsheet, category: Productivity and Project Management, hint_url: "https://smartsheet.com/developers"}
+- {slug: harvest, name: Harvest, category: Productivity and Project Management, hint_url: "https://help.getharvest.com/api-v2"}
+
+- {slug: stripe, name: Stripe, category: Finance and Fintech, hint_url: "https://stripe.com/docs/api"}
+- {slug: plaid, name: Plaid, category: Finance and Fintech, hint_url: "https://plaid.com/docs"}
+- {slug: binance, name: Binance, category: Finance and Fintech, hint_url: "https://binance-docs.github.io"}
+- {slug: paygent-connect, name: Paygent Connect, category: Finance and Fintech, hint_url: "https://paygent.co.jp", is_trap: true, trap_note: "'Paygent' is a Japanese gateway; the 'NMI-powered' qualifier suggests a different/white-labelled product. Two plausible entities."}
+- {slug: ipayx, name: iPayX, category: Finance and Fintech, hint_url: "https://ipayx.ai/docs", is_trap: true, trap_note: "Many unrelated 'iPay'-family companies across bill-pay, African/Asian fintech, crypto. Confirming the specific ipayx.ai product is unreliable."}
+- {slug: quickbooks, name: QuickBooks, category: Finance and Fintech, hint_url: "https://developer.intuit.com"}
+- {slug: xero, name: Xero, category: Finance and Fintech, hint_url: "https://developer.xero.com"}
+- {slug: brex, name: Brex, category: Finance and Fintech, hint_url: "https://developer.brex.com"}
+- {slug: ramp, name: Ramp, category: Finance and Fintech, hint_url: "https://docs.ramp.com"}
+- {slug: pitchbook, name: PitchBook, category: Finance and Fintech, hint_url: "https://pitchbook.com"}
+
+- {slug: notebooklm, name: NotebookLM, category: AI Research and Media-native, hint_url: "https://cloud.google.com/gemini"}
+- {slug: otter-ai, name: Otter AI, category: AI Research and Media-native, hint_url: "https://help.otter.ai"}
+- {slug: fathom, name: Fathom, category: AI Research and Media-native, hint_url: "https://fathom.video"}
+- {slug: consensus, name: Consensus, category: AI Research and Media-native, hint_url: "https://consensus.app", is_trap: true, trap_note: "Name collision: consensus.app (academic search) vs goconsensus.com (sales-demo automation). Assignment URL maps to the research product."}
+- {slug: reducto, name: Reducto, category: AI Research and Media-native, hint_url: "https://reducto.ai"}
+- {slug: devin, name: Devin, category: AI Research and Media-native, hint_url: "https://docs.devin.ai"}
+- {slug: higgsfield, name: higgsfield, category: AI Research and Media-native, hint_url: "https://higgsfield.ai/cli"}
+- {slug: mermaid-cli, name: Mermaid CLI, category: AI Research and Media-native, hint_url: "https://github.com/mermaid-js/mermaid-cli", is_trap: true, trap_note: "Wrong-shape: an npm binary that renders diagrams locally. Not a service with credentials."}
+- {slug: youtube-transcript, name: YouTube Transcript, category: AI Research and Media-native, hint_url: "https://transcriptapi.com"}
+- {slug: grain, name: Grain, category: AI Research and Media-native, hint_url: "https://grain.com"}

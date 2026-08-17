@@ -1,0 +1,215 @@
+# Gold set — 20 apps, stratified (seed=20260817), for accuracy measurement.
+#
+# Labels were established by independent assessment against primary vendor documentation,
+# separate from the extraction pipeline (a different model and method than the Gemini
+# extractor + OpenRouter critic that produce the dataset). See NOTES.md for method and the
+# honest limitation. `composio_toolkit` mirrors the deterministic catalog diff, not a model
+# judgment. Genuinely ambiguous entities are labelled `UNKNOWN`/`unknown` on purpose — that
+# is the correct answer, and it tests whether the pipeline abstains.
+#
+# Fields scored: auth_schemes (primary), gate, mcp, composio_toolkit, buildability.
+
+- slug: mermaid-cli
+  stratum: not_an_app
+  auth_schemes: [NO_AUTH]
+  gate: no_api
+  mcp: none
+  composio_toolkit: unknown
+  buildability: not_a_toolkit
+  evidence_url: https://github.com/mermaid-js/mermaid-cli
+  note: npm binary (mmdc) that renders diagrams locally; no hosted API, no credentials.
+
+- slug: sherlock
+  stratum: not_an_app
+  auth_schemes: [NO_AUTH]
+  gate: no_api
+  mcp: none
+  composio_toolkit: unknown
+  buildability: not_a_toolkit
+  evidence_url: https://github.com/sherlock-project/sherlock
+  note: local CLI that checks usernames across sites; no hosted API, no auth.
+
+- slug: fanbasis
+  stratum: ambiguous
+  auth_schemes: [UNKNOWN]
+  gate: unknown
+  mcp: unknown
+  composio_toolkit: unknown
+  buildability: unknown
+  evidence_url: https://fanbasis.com
+  note: name collision / possible rebrand (Commas); current entity + auth not reliably
+    establishable from public sources. Correct output is a documented abstention.
+
+- slug: paygent-connect
+  stratum: ambiguous
+  auth_schemes: [UNKNOWN]
+  gate: unknown
+  mcp: unknown
+  composio_toolkit: unknown
+  buildability: unknown
+  evidence_url: https://paygent.co.jp
+  note: '"Paygent" is a Japanese gateway; the "NMI-powered" qualifier points to a different
+    or white-labelled product. Two plausible entities; unresolvable. Abstain.'
+
+- slug: consensus
+  stratum: ambiguous
+  auth_schemes: [OAUTH2]
+  gate: unknown
+  mcp: first_party
+  composio_toolkit: unknown
+  buildability: unknown
+  evidence_url: https://consensus.app
+  note: name collision (consensus.app academic search vs goconsensus.com sales). Maps to the
+    research product; it has a first-party MCP (OAuth), but the API access tier is not clearly
+    published, so gate/buildability are left unknown.
+
+- slug: clay
+  stratum: recently_changed
+  auth_schemes: [API_KEY]
+  gate: self_serve
+  mcp: first_party
+  composio_toolkit: unknown
+  buildability: build_now
+  evidence_url: https://developers.clay.com
+  note: public API + CLI shipped 2026 on all plans (older sources say none — a staleness test).
+
+- slug: ahrefs
+  stratum: recently_changed
+  auth_schemes: [API_KEY]
+  gate: paid_tier
+  mcp: none
+  composio_toolkit: exists
+  buildability: build_gated
+  evidence_url: https://ahrefs.com/api
+  note: API v3 sits behind paid tiers; the tier boundary moved in 2026 (staleness test).
+
+- slug: snowflake
+  stratum: paid_tier
+  auth_schemes: [OAUTH2]
+  gate: self_serve
+  mcp: first_party
+  composio_toolkit: exists
+  buildability: build_now
+  evidence_url: https://docs.snowflake.com
+  note: free trial account is self-serve; production carries compute cost. Official MCP (2026).
+
+- slug: devin
+  stratum: paid_tier
+  auth_schemes: [BEARER_TOKEN]
+  gate: paid_tier
+  mcp: first_party
+  composio_toolkit: unknown
+  buildability: build_gated
+  evidence_url: https://docs.devin.ai
+  note: bearer API key on a paid Cognition account; official MCP (mcp.devin.ai).
+
+- slug: otter-ai
+  stratum: paid_tier
+  auth_schemes: [OAUTH2]
+  gate: contact_sales
+  mcp: first_party
+  composio_toolkit: unknown
+  buildability: needs_deal
+  evidence_url: https://help.otter.ai
+  note: public API is beta and Enterprise-only; requires talking to an account manager.
+
+- slug: linear
+  stratum: easy_self_serve
+  auth_schemes: [OAUTH2, API_KEY]
+  gate: self_serve
+  mcp: first_party
+  composio_toolkit: exists
+  buildability: build_now
+  evidence_url: https://linear.app/developers
+  note: OAuth2 + personal API key, free tier; official MCP (mcp.linear.app). GraphQL.
+
+- slug: harvest
+  stratum: easy_self_serve
+  auth_schemes: [OAUTH2]
+  gate: self_serve
+  mcp: none
+  composio_toolkit: exists
+  buildability: build_now
+  evidence_url: https://help.getharvest.com/api-v2
+  note: OAuth2 + personal access token, free developer access.
+
+- slug: smartsheet
+  stratum: easy_self_serve
+  auth_schemes: [OAUTH2]
+  gate: self_serve
+  mcp: none
+  composio_toolkit: unknown
+  buildability: build_now
+  evidence_url: https://smartsheet.com/developers
+  note: OAuth2 + raw API access token, self-serve.
+
+- slug: airtable
+  stratum: easy_self_serve
+  auth_schemes: [OAUTH2]
+  gate: self_serve
+  mcp: first_party
+  composio_toolkit: exists
+  buildability: build_now
+  evidence_url: https://airtable.com/developers/web/api/introduction
+  note: OAuth2 + personal access token, free tier; official MCP (mcp.airtable.com).
+
+- slug: mongodb-atlas
+  stratum: easy_self_serve
+  auth_schemes: [API_KEY]
+  gate: self_serve
+  mcp: first_party
+  composio_toolkit: unknown
+  buildability: build_now
+  evidence_url: https://mongodb.com/docs/atlas/api
+  note: Atlas Admin API uses programmatic API keys (HTTP digest); free tier; official MCP.
+
+- slug: google-ads
+  stratum: gated_documented
+  auth_schemes: [OAUTH2]
+  gate: partner_gated
+  mcp: none
+  composio_toolkit: exists
+  buildability: build_gated
+  evidence_url: https://developers.google.com/google-ads/api/docs/get-started/introduction
+  note: two-stage gate — developer token is obtainable (test), but production/standard access
+    needs a separate application + approval. Most write-ups collapse this incorrectly.
+
+- slug: brex
+  stratum: gated_documented
+  auth_schemes: [OAUTH2]
+  gate: admin_approval
+  mcp: none
+  composio_toolkit: exists
+  buildability: build_gated
+  evidence_url: https://developer.brex.com
+  note: OAuth2 / API tokens, but a token is minted by an admin inside a provisioned Brex account.
+
+- slug: squarespace
+  stratum: gated_documented
+  auth_schemes: [API_KEY]
+  gate: paid_tier
+  mcp: none
+  composio_toolkit: unknown
+  buildability: build_gated
+  evidence_url: https://developers.squarespace.com
+  note: API keys require a Business plan or higher (paid).
+
+- slug: gumroad
+  stratum: gated_documented
+  auth_schemes: [OAUTH2]
+  gate: self_serve
+  mcp: none
+  composio_toolkit: exists
+  buildability: build_now
+  evidence_url: https://help.gumroad.com/article/280-create-application-api
+  note: OAuth2 application + access token, free.
+
+- slug: woocommerce
+  stratum: gated_documented
+  auth_schemes: [API_KEY]
+  gate: self_serve
+  mcp: none
+  composio_toolkit: unknown
+  buildability: build_now
+  evidence_url: https://woocommerce.com/document/woocommerce-rest-api
+  note: REST API uses consumer key/secret generated in wp-admin; self-serve on a WooCommerce store.

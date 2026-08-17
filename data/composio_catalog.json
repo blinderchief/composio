@@ -1,0 +1,770 @@
+{
+  "snapshot_date": "2026-08-17",
+  "fetched_at": "2026-08-17T17:40:34.154862+00:00",
+  "source": "scrape",
+  "complete": false,
+  "catalog_size": 1015,
+  "note": "PARTIAL SOURCE: the public page renders a subset (~1000 of ~1100+). No-match is recorded as 'unknown', not 'absent'. Add a valid Composio_api key to .env for the authoritative diff.",
+  "counts": {
+    "exists": 51,
+    "unknown": 49,
+    "fuzzy_suggestions": 2
+  },
+  "apps": [
+    {
+      "slug": "salesforce",
+      "name": "Salesforce",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "salesforce",
+      "match": "exact"
+    },
+    {
+      "slug": "hubspot",
+      "name": "HubSpot",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "hubspot",
+      "match": "exact"
+    },
+    {
+      "slug": "pipedrive",
+      "name": "Pipedrive",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "pipedrive",
+      "match": "exact"
+    },
+    {
+      "slug": "attio",
+      "name": "Attio",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "attio",
+      "match": "exact"
+    },
+    {
+      "slug": "twenty",
+      "name": "Twenty",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "podio",
+      "name": "Podio",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "zoho-crm",
+      "name": "Zoho CRM",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "close",
+      "name": "Close",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "close",
+      "match": "exact"
+    },
+    {
+      "slug": "copper",
+      "name": "Copper",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "dealcloud",
+      "name": "DealCloud",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "zendesk",
+      "name": "Zendesk",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "zendesk",
+      "match": "exact"
+    },
+    {
+      "slug": "intercom",
+      "name": "Intercom",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "intercom",
+      "match": "exact"
+    },
+    {
+      "slug": "freshdesk",
+      "name": "Freshdesk",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "freshdesk",
+      "match": "exact"
+    },
+    {
+      "slug": "front",
+      "name": "Front",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "pylon",
+      "name": "Pylon",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "liveagent",
+      "name": "LiveAgent",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "plain",
+      "name": "Plain",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "plain",
+      "match": "exact"
+    },
+    {
+      "slug": "help-scout",
+      "name": "Help Scout",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "help_scout",
+      "match": "exact"
+    },
+    {
+      "slug": "gorgias",
+      "name": "Gorgias",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "gorgias",
+      "match": "exact"
+    },
+    {
+      "slug": "gladly",
+      "name": "Gladly",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "slack",
+      "name": "Slack",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "slack",
+      "match": "exact"
+    },
+    {
+      "slug": "twilio",
+      "name": "Twilio",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "zoho-cliq",
+      "name": "Zoho Cliq",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "lark",
+      "name": "Lark (Larksuite)",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "pumble",
+      "name": "Pumble",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "discord",
+      "name": "Discord",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "discord",
+      "match": "exact"
+    },
+    {
+      "slug": "telegram",
+      "name": "Telegram",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "telegram",
+      "match": "exact"
+    },
+    {
+      "slug": "whatsapp-business",
+      "name": "WhatsApp Business",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "aircall",
+      "name": "Aircall",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "vonage",
+      "name": "Vonage",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "google-ads",
+      "name": "Google Ads",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "googleads",
+      "match": "exact"
+    },
+    {
+      "slug": "meta-ads",
+      "name": "Meta Ads",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "metaads",
+      "match": "exact"
+    },
+    {
+      "slug": "linkedin-ads",
+      "name": "LinkedIn Ads",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "linkedin_ads",
+      "match": "exact"
+    },
+    {
+      "slug": "gohighlevel",
+      "name": "GoHighLevel",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": {
+        "slug": "highlevel",
+        "score": 90.0
+      }
+    },
+    {
+      "slug": "mailchimp",
+      "name": "Mailchimp",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "mailchimp",
+      "match": "exact"
+    },
+    {
+      "slug": "klaviyo",
+      "name": "Klaviyo",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "klaviyo",
+      "match": "exact"
+    },
+    {
+      "slug": "systeme-io",
+      "name": "systeme.io",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "pinterest",
+      "name": "Pinterest",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "threads",
+      "name": "Threads (Meta)",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "sendgrid",
+      "name": "SendGrid",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "sendgrid",
+      "match": "exact"
+    },
+    {
+      "slug": "shopify",
+      "name": "Shopify",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "shopify",
+      "match": "exact"
+    },
+    {
+      "slug": "woocommerce",
+      "name": "WooCommerce",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "bigcommerce",
+      "name": "BigCommerce",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "salesforce-commerce-cloud",
+      "name": "Salesforce Commerce Cloud",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "magento",
+      "name": "Magento (Adobe Commerce)",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "squarespace",
+      "name": "Squarespace",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "ecwid",
+      "name": "Ecwid",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "gumroad",
+      "name": "Gumroad",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "gumroad",
+      "match": "exact"
+    },
+    {
+      "slug": "amazon-sp",
+      "name": "Amazon Selling Partner",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "fanbasis",
+      "name": "fanbasis",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "dataforseo",
+      "name": "DataForSEO",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "dataforseo",
+      "match": "exact"
+    },
+    {
+      "slug": "se-ranking",
+      "name": "SE Ranking",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "ahrefs",
+      "name": "Ahrefs",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "ahrefs",
+      "match": "exact"
+    },
+    {
+      "slug": "mrscraper",
+      "name": "MrScraper",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "apify",
+      "name": "Apify",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "apify",
+      "match": "exact"
+    },
+    {
+      "slug": "firecrawl",
+      "name": "Firecrawl",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "firecrawl",
+      "match": "exact"
+    },
+    {
+      "slug": "bright-data",
+      "name": "Bright Data",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "brightdata",
+      "match": "exact"
+    },
+    {
+      "slug": "sherlock",
+      "name": "Sherlock",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "waterfall-io",
+      "name": "Waterfall.io",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "clay",
+      "name": "Clay",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "github",
+      "name": "GitHub",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "github",
+      "match": "exact"
+    },
+    {
+      "slug": "vercel",
+      "name": "Vercel",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "vercel",
+      "match": "exact"
+    },
+    {
+      "slug": "netlify",
+      "name": "Netlify",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "cloudflare",
+      "name": "Cloudflare",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "cloudflare",
+      "match": "exact"
+    },
+    {
+      "slug": "supabase",
+      "name": "Supabase",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "supabase",
+      "match": "exact"
+    },
+    {
+      "slug": "neo4j",
+      "name": "Neo4j",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "neo4j",
+      "match": "exact"
+    },
+    {
+      "slug": "snowflake",
+      "name": "Snowflake",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "snowflake",
+      "match": "exact"
+    },
+    {
+      "slug": "mongodb-atlas",
+      "name": "MongoDB Atlas",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "datadog",
+      "name": "Datadog",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "datadog",
+      "match": "exact"
+    },
+    {
+      "slug": "sentry",
+      "name": "Sentry",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "sentry",
+      "match": "exact"
+    },
+    {
+      "slug": "notion",
+      "name": "Notion",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "notion",
+      "match": "exact"
+    },
+    {
+      "slug": "airtable",
+      "name": "Airtable",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "airtable",
+      "match": "exact"
+    },
+    {
+      "slug": "linear",
+      "name": "Linear",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "linear",
+      "match": "exact"
+    },
+    {
+      "slug": "jira",
+      "name": "Jira",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "jira",
+      "match": "exact"
+    },
+    {
+      "slug": "asana",
+      "name": "Asana",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "asana",
+      "match": "exact"
+    },
+    {
+      "slug": "monday",
+      "name": "Monday.com",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "monday",
+      "match": "exact"
+    },
+    {
+      "slug": "clickup",
+      "name": "ClickUp",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "clickup",
+      "match": "exact"
+    },
+    {
+      "slug": "coda",
+      "name": "Coda",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "coda",
+      "match": "exact"
+    },
+    {
+      "slug": "smartsheet",
+      "name": "Smartsheet",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "harvest",
+      "name": "Harvest",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "harvest",
+      "match": "exact"
+    },
+    {
+      "slug": "stripe",
+      "name": "Stripe",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "stripe",
+      "match": "exact"
+    },
+    {
+      "slug": "plaid",
+      "name": "Plaid",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": {
+        "slug": "placid",
+        "score": 90.9
+      }
+    },
+    {
+      "slug": "binance",
+      "name": "Binance",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "paygent-connect",
+      "name": "Paygent Connect",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "ipayx",
+      "name": "iPayX",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "quickbooks",
+      "name": "QuickBooks",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "quickbooks",
+      "match": "exact"
+    },
+    {
+      "slug": "xero",
+      "name": "Xero",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "xero",
+      "match": "exact"
+    },
+    {
+      "slug": "brex",
+      "name": "Brex",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "brex",
+      "match": "exact"
+    },
+    {
+      "slug": "ramp",
+      "name": "Ramp",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "ramp",
+      "match": "exact"
+    },
+    {
+      "slug": "pitchbook",
+      "name": "PitchBook",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "notebooklm",
+      "name": "NotebookLM",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "notebooklm",
+      "match": "exact"
+    },
+    {
+      "slug": "otter-ai",
+      "name": "Otter AI",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "fathom",
+      "name": "Fathom",
+      "composio_toolkit": "exists",
+      "composio_toolkit_slug": "fathom",
+      "match": "exact"
+    },
+    {
+      "slug": "consensus",
+      "name": "Consensus",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "reducto",
+      "name": "Reducto",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "devin",
+      "name": "Devin",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "higgsfield",
+      "name": "higgsfield",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "mermaid-cli",
+      "name": "Mermaid CLI",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "youtube-transcript",
+      "name": "YouTube Transcript",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    },
+    {
+      "slug": "grain",
+      "name": "Grain",
+      "composio_toolkit": "unknown",
+      "composio_toolkit_slug": null,
+      "match": "none",
+      "fuzzy_suggestion": null
+    }
+  ]
+}

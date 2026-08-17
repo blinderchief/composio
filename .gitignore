@@ -1,0 +1,21 @@
+# secrets
+.env
+
+# python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# raw fetch cache — reproducible from a run, not committed (can be large)
+data/cache/
+
+# run artifacts are intermediate; final/ is what ships and IS committed
+data/runs/
+
+# os
+.DS_Store
+data/cache/

@@ -1,0 +1,283 @@
+# PROPOSED gold sample — seed=20260817. Verify each row BY HAND per GOLD_SET.md,
+# BEFORE viewing agent output, then move the finished rows into gold/gold_set.yaml.
+# This file is a proposal only. The agent must never write gold/.
+- slug: mermaid-cli
+  name: Mermaid CLI
+  category: AI Research and Media-native
+  stratum: not_an_app
+  hint_url: https://github.com/mermaid-js/mermaid-cli
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: sherlock
+  name: Sherlock
+  category: Data SEO and Scraping
+  stratum: not_an_app
+  hint_url: https://github.com/sherlock-project/sherlock
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: fanbasis
+  name: fanbasis
+  category: Ecommerce
+  stratum: ambiguous
+  hint_url: https://fanbasis.com
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: paygent-connect
+  name: Paygent Connect
+  category: Finance and Fintech
+  stratum: ambiguous
+  hint_url: https://paygent.co.jp
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: consensus
+  name: Consensus
+  category: AI Research and Media-native
+  stratum: ambiguous
+  hint_url: https://consensus.app
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: higgsfield
+  name: higgsfield
+  category: AI Research and Media-native
+  stratum: recently_changed
+  hint_url: https://higgsfield.ai/cli
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: reducto
+  name: Reducto
+  category: AI Research and Media-native
+  stratum: recently_changed
+  hint_url: https://reducto.ai
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: pitchbook
+  name: PitchBook
+  category: Finance and Fintech
+  stratum: paid_tier
+  hint_url: https://pitchbook.com
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: devin
+  name: Devin
+  category: AI Research and Media-native
+  stratum: paid_tier
+  hint_url: https://docs.devin.ai
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: otter-ai
+  name: Otter AI
+  category: AI Research and Media-native
+  stratum: paid_tier
+  hint_url: https://help.otter.ai
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: smartsheet
+  name: Smartsheet
+  category: Productivity and Project Management
+  stratum: easy_self_serve
+  hint_url: https://smartsheet.com/developers
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: datadog
+  name: Datadog
+  category: Developer Infra and Data
+  stratum: easy_self_serve
+  hint_url: https://docs.datadoghq.com/api
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: mongodb-atlas
+  name: MongoDB Atlas
+  category: Developer Infra and Data
+  stratum: easy_self_serve
+  hint_url: https://mongodb.com/docs/atlas/api
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: neo4j
+  name: Neo4j
+  category: Developer Infra and Data
+  stratum: easy_self_serve
+  hint_url: https://neo4j.com/docs/api
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: airtable
+  name: Airtable
+  category: Productivity and Project Management
+  stratum: easy_self_serve
+  hint_url: https://airtable.com/developers
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: xero
+  name: Xero
+  category: Finance and Fintech
+  stratum: gated_documented
+  hint_url: https://developer.xero.com
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: google-ads
+  name: Google Ads
+  category: Marketing Ads Email and Social
+  stratum: gated_documented
+  hint_url: https://developers.google.com/google-ads
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: gumroad
+  name: Gumroad
+  category: Ecommerce
+  stratum: gated_documented
+  hint_url: https://gumroad.com/api
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: sendgrid
+  name: SendGrid
+  category: Marketing Ads Email and Social
+  stratum: gated_documented
+  hint_url: https://sendgrid.com
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO
+- slug: threads
+  name: Threads (Meta)
+  category: Marketing Ads Email and Social
+  stratum: gated_documented
+  hint_url: https://developers.facebook.com/docs/threads
+  auth_schemes: TODO
+  gate: TODO
+  mcp: TODO
+  composio_toolkit: TODO
+  buildability: TODO
+  verified_by: TODO
+  verified_at: TODO
+  evidence_url: TODO
+  quote_span: TODO

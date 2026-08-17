@@ -1,0 +1,16 @@
+# Connector Readiness Audit
+
+Agentic research over 100 SaaS apps for Composio toolkit buildability, with a prioritized build-and-outreach queue and honest, gold-scored accuracy.
+
+Status: partial (34/100) (run run-100).
+
+## Headline
+- 34 apps audited; 17 already Composio toolkits (lower bound (partial catalog source)).
+- 24 can ship this week with zero approvals.
+- 0 need outreach/approval — start those now (long lead times).
+- 0 are not toolkits (no API / wrong shape).
+- 6 routed to human review; 19 have first-party MCP.
+
+## Machine-readable
+- Full dataset: ./data.json
+- Source + README: see repository.

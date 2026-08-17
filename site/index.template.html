@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en" data-theme="auto">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connector Readiness Audit — 100 apps, one build-and-outreach queue</title>
+<meta name="description" content="Agentic research over 100 SaaS apps for Composio toolkit buildability: a prioritized build-and-outreach queue, honest gold-scored accuracy with Wilson intervals, and a full audit trail.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗂️</text></svg>">
+<script type="application/ld+json" id="jsonld-dataset"></script>
+<style>
+/* ---- tokens: a manifest / dispatch-board palette (PRD §8.3). One saturated accent
+   (--stamp) is reserved for work that needs a human. Everything else stays quiet. ---- */
+:root{
+  --paper:#f4f3ee; --paper-2:#eceae1; --ink:#1b1d1f; --ink-2:#565a5e; --ink-3:#8a8d88;
+  --line:#d7d4c8; --line-2:#c4c1b4; --steel:#3c5a72; --steel-ink:#294559;
+  --stamp:#c8401b; --stamp-bg:#f7e3da; --ok:#3f6f52; --ok-bg:#e4ece2;
+  --hold:#8a6d1f; --hold-bg:#f0e8cf;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,monospace;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --shadow:0 1px 0 var(--line-2),0 2px 8px rgba(20,20,18,.04);
+}
+:root[data-theme="dark"],
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#17191b; --paper-2:#1f2225; --ink:#e9e7df; --ink-2:#a9aca6; --ink-3:#6f736d;
+  --line:#2c2f32; --line-2:#3a3e42; --steel:#7fa8c9; --steel-ink:#a9c8e0;
+  --stamp:#f0623a; --stamp-bg:#3a1e15; --ok:#79b58e; --ok-bg:#182a20;
+  --hold:#d8b552; --hold-bg:#2c2513; --shadow:0 1px 0 #000,0 2px 8px rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  --paper:#17191b; --paper-2:#1f2225; --ink:#e9e7df; --ink-2:#a9aca6; --ink-3:#6f736d;
+  --line:#2c2f32; --line-2:#3a3e42; --steel:#7fa8c9; --steel-ink:#a9c8e0;
+  --stamp:#f0623a; --stamp-bg:#3a1e15; --ok:#79b58e; --ok-bg:#182a20;
+  --hold:#d8b552; --hold-bg:#2c2513; --shadow:0 1px 0 #000,0 2px 8px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:var(--steel-ink);text-decoration:none;border-bottom:1px solid var(--line-2)}
+a:hover{border-bottom-color:var(--steel)}
+:focus-visible{outline:2px solid var(--stamp);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+.mono{font-family:var(--mono)}
+h1,h2,h3{line-height:1.1;letter-spacing:-.02em;font-weight:750}
+section{padding:38px 0;border-top:1px solid var(--line)}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 10px}
+.small{font-size:13.5px;color:var(--ink-2)}
+/* ---- masthead ---- */
+.mast{padding:26px 0 6px;border-top:0}
+.mast-row{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+.brand{font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-2)}
+.mrn{font-family:var(--mono);font-size:12px;color:var(--ink-3)}
+.mrn b{color:var(--ink-2);font-weight:600}
+/* ---- headline ---- */
+.headline{font-size:clamp(26px,4.4vw,46px);letter-spacing:-.03em;margin:6px 0 4px;max-width:20ch}
+.lede{font-size:clamp(17px,2vw,21px);color:var(--ink);max-width:60ch;line-height:1.45}
+.lede b{background:var(--stamp-bg);box-shadow:0 0 0 3px var(--stamp-bg);border-radius:2px;font-weight:700}
+/* ---- stat strip ---- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);margin-top:22px}
+.stat{background:var(--paper);padding:16px 16px 14px}
+.stat .n{font-family:var(--mono);font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1}
+.stat .l{font-size:12.5px;color:var(--ink-2);margin-top:7px}
+.stat .ci{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-top:3px}
+.stat.flag .n{color:var(--stamp)}
+/* ---- queue board ---- */
+.lanes{display:grid;gap:14px}
+.lane{border:1px solid var(--line);background:var(--paper-2);border-radius:3px;overflow:hidden}
+.lane-h{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);
+  background:var(--paper);position:sticky}
+.lane-h .dot{width:9px;height:9px;border-radius:50%;background:var(--steel)}
+.lane-h .name{font-weight:700;letter-spacing:-.01em}
+.lane-h .cnt{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-left:auto}
+.lane.urgent .lane-h .dot{background:var(--stamp)}
+.lane.urgent .lane-h{background:var(--stamp-bg)}
+.qi{display:grid;grid-template-columns:26px 1.1fr 2fr auto;gap:12px;align-items:start;
+  padding:10px 14px;border-bottom:1px solid var(--line)}
+.qi:last-child{border-bottom:0}
+.qi .rank{font-family:var(--mono);font-size:12px;color:var(--ink-3);padding-top:2px}
+.qi .app{font-weight:650}
+.qi .app .cat{display:block;font-size:11.5px;color:var(--ink-3);font-weight:400;margin-top:1px}
+.qi .act{font-size:14px;color:var(--ink-2)}
+.qi .meta{display:flex;flex-direction:column;align-items:flex-end;gap:4px;white-space:nowrap}
+.lead{font-family:var(--mono);font-size:11px}
+.leadbar{height:5px;border-radius:3px;background:var(--line-2);position:relative;width:120px;margin-top:2px}
+.leadbar>i{position:absolute;inset:0;background:var(--stamp);border-radius:3px;opacity:.75}
+.tag{font-family:var(--mono);font-size:10.5px;padding:2px 6px;border:1px solid var(--line-2);
+  border-radius:3px;color:var(--ink-2);text-transform:uppercase;letter-spacing:.05em}
+.tag.eng{border-color:var(--steel);color:var(--steel-ink)}
+.tag.bd{border-color:var(--stamp);color:var(--stamp);background:var(--stamp-bg)}
+.tag.ops{border-color:var(--hold);color:var(--hold);background:var(--hold-bg)}
+/* ---- matrix ---- */
+.matrix{border-collapse:collapse;width:100%;font-size:13.5px}
+.matrix th,.matrix td{border:1px solid var(--line);padding:8px 10px;text-align:center}
+.matrix th{background:var(--paper-2);font-weight:600}
+.matrix td.cat{text-align:left;font-weight:600}
+.cell{font-family:var(--mono);position:relative}
+.cell .hb{position:absolute;left:0;bottom:0;height:3px;background:var(--stamp);opacity:.5}
+/* ---- table ---- */
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.controls input,.controls select{font-family:var(--mono);font-size:13px;padding:7px 9px;
+  border:1px solid var(--line-2);background:var(--paper);color:var(--ink);border-radius:3px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line)}
+table.data{border-collapse:collapse;width:100%;min-width:920px;font-size:13px}
+table.data th,table.data td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.data th{background:var(--paper-2);position:sticky;top:0;cursor:pointer;white-space:nowrap;
+  font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2);z-index:2}
+table.data th[aria-sort="ascending"]::after{content:" ▲";color:var(--ink-3)}
+table.data th[aria-sort="descending"]::after{content:" ▼";color:var(--ink-3)}
+table.data td.m{font-family:var(--mono);font-size:12px;white-space:nowrap}
+tr.needs-human{background:var(--stamp-bg)}
+.pill{font-family:var(--mono);font-size:10.5px;padding:1px 6px;border-radius:3px;border:1px solid var(--line-2)}
+.pill.high{color:var(--ok);border-color:var(--ok)}
+.pill.low{color:var(--stamp);border-color:var(--stamp)}
+.pill.verified{color:var(--ok);border-color:var(--ok)}
+.pill.unknown{color:var(--stamp);border-color:var(--stamp);background:var(--stamp-bg)}
+.evlink{font-family:var(--mono);font-size:11px}
+/* ---- pipeline / verify ---- */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.pipe{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-family:var(--mono);font-size:12px}
+.pipe .st{border:1px solid var(--line-2);padding:6px 9px;border-radius:3px;background:var(--paper-2)}
+.pipe .ar{color:var(--ink-3)}
+.delta{border-collapse:collapse;width:100%;font-size:13px}
+.delta th,.delta td{border:1px solid var(--line);padding:7px 9px;text-align:right}
+.delta th:first-child,.delta td:first-child{text-align:left}
+.delta td.up{color:var(--ok)}
+.fixes{list-style:none;padding:0;margin:0;font-size:13px}
+.fixes li{padding:6px 0;border-bottom:1px solid var(--line);font-family:var(--mono);font-size:12px}
+.callout{background:var(--paper-2);border:1px solid var(--line);border-left:3px solid var(--steel);
+  padding:14px 16px;border-radius:3px;font-size:14.5px}
+.callout.warn{border-left-color:var(--stamp)}
+.defeated{display:grid;gap:12px}
+.defeated .d{border:1px solid var(--line);border-left:3px solid var(--stamp);padding:12px 14px;
+  border-radius:3px;background:var(--stamp-bg)}
+.defeated .d h4{margin:0 0 4px;font-family:var(--mono);font-size:13px}
+footer{padding:30px 0 60px;color:var(--ink-3);font-size:12.5px}
+.banner{background:var(--hold-bg);border:1px solid var(--hold);color:var(--ink);padding:10px 14px;
+  border-radius:3px;font-size:13.5px;margin-top:14px}
+@media(max-width:720px){
+  .grid2{grid-template-columns:1fr}
+  .qi{grid-template-columns:20px 1fr;gap:6px}
+  .qi .meta{flex-direction:row;align-items:center;grid-column:1/-1;justify-content:flex-start}
+  .qi .act{grid-column:1/-1}
+  .leadbar{width:90px}
+}
+</style>
+</head>
+<body>
+<script id="audit-data" type="application/json">/*__DATA_JSON__*/null</script>
+
+<header class="mast wrap">
+  <div class="mast-row">
+    <span class="brand">Connector Readiness Audit</span>
+    <span class="mrn">manifest <b id="m-run">—</b> · <b id="m-date">—</b> · <a href="./data.json">machine-readable ↗ /data.json</a></span>
+  </div>
+</header>
+
+<main>
+<div id="preview-banner"></div>
+
+<!-- 1 · HEADLINE -->
+<section class="wrap" id="top" style="border-top:0;padding-top:14px">
+  <p class="kicker">The finding, in two sentences</p>
+  <h1 class="headline" id="headline">—</h1>
+  <p class="lede" id="lede">—</p>
+  <div class="stats" id="stats"></div>
+</section>
+
+<!-- 2 · THE QUEUE -->
+<section class="wrap" id="queue">
+  <p class="kicker">The operational payload · ordered by when you must start, not by name</p>
+  <h2>Build-and-outreach queue</h2>
+  <p class="small" style="max-width:64ch">Outreach items rank first because their lead times are long — you have to start them today even when they score lower by value. Colour is spent only where a human is on the critical path.</p>
+  <div class="lanes" id="lanes" style="margin-top:16px"></div>
+</section>
+
+<!-- 3 · MATRIX -->
+<section class="wrap" id="matrix">
+  <p class="kicker">Where the pain concentrates</p>
+  <h2>Self-serve vs gated, by category</h2>
+  <div class="tablewrap" style="border:0;margin-top:14px"><table class="matrix" id="matrixtbl"></table></div>
+</section>
+
+<!-- 4 · TABLE -->
+<section class="wrap" id="table">
+  <p class="kicker">Reference · every row traces to fetched evidence</p>
+  <h2>The 100</h2>
+  <div class="controls">
+    <input id="q" type="search" placeholder="filter: name, auth, gate…" aria-label="filter table">
+    <select id="fcat" aria-label="category"><option value="">all categories</option></select>
+    <select id="fbuild" aria-label="buildability"><option value="">all buildability</option></select>
+    <label class="small"><input type="checkbox" id="fhuman"> needs-human only</label>
+    <span class="small mono" id="rowcount"></span>
+  </div>
+  <div class="tablewrap">
+    <table class="data" id="datatbl">
+      <thead><tr id="thead"></tr></thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 5 · HOW IT WAS BUILT -->
+<section class="wrap" id="how">
+  <p class="kicker">The agent · and where a human was needed</p>
+  <h2>How it was built</h2>
+  <div class="grid2" style="margin-top:12px">
+    <div>
+      <div class="pipe" id="pipe"></div>
+      <p class="small" style="margin-top:14px">Nine stages, each a pure function over the previous stage's file on disk — resumable after a crash, idempotent on re-run. The extractor (Gemini) can never cite a URL it did not fetch: citations are constrained to an enum of this run's document ids, then re-validated against the fetch log. An independent critic on a <em>different</em> vendor (via OpenRouter) reviews each record so it can't share the extractor's mistakes.</p>
+    </div>
+    <div>
+      <div class="callout warn">
+        <strong id="human-count">—</strong> rows were routed to a human review queue — unknown auth or gate, low confidence, or a flagged ambiguous entity. That routing is the deliverable, not an apology: the job is to move apps through approval, and knowing which ones need a person is step one.
+      </div>
+      <p class="small" id="browser-note" style="margin-top:12px"></p>
+    </div>
+  </div>
+</section>
+
+<!-- 6 · VERIFICATION -->
+<section class="wrap" id="verify">
+  <p class="kicker">Accuracy is what matters most · measured, not asserted</p>
+  <h2>Verification</h2>
+  <div id="acc-body"></div>
+</section>
+
+<!-- 7 · WHAT DEFEATED US -->
+<section class="wrap" id="defeated">
+  <p class="kicker">Findings, not apologies</p>
+  <h2>What defeated us</h2>
+  <p class="small" style="max-width:64ch">The list contains entries that are unverifiable or share a name with a different company. The correct output for these is a documented abstention — a confident wrong answer here would be the real failure.</p>
+  <div class="defeated" id="defeated-list" style="margin-top:14px"></div>
+</section>
+
+<!-- 8 · PROOF -->
+<section class="wrap" id="proof">
+  <p class="kicker">One completed lap of the pipeline</p>
+  <h2>The proof</h2>
+  <div class="callout" id="proof-body">The proof artifact (a live MCP server for one net-new self-serve app, or a re-run trigger) is described in the repository README.</div>
+</section>
+</main>
+
+<footer class="wrap">
+  <div id="foot">Connector Readiness Audit · agent-built research over 100 SaaS apps, with a prioritized build-and-outreach queue. Every claim traces to <a href="./data.json">data.json</a>; every citation was fetched and re-validated. Facts are dated; catalogs move.</div>
+</footer>
+
+<script src="./app.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+[project]
+name = "connector-readiness-audit"
+version = "0.1.0"
+description = "Agentic research pipeline that audits 100 SaaS apps for Composio toolkit buildability and emits a prioritized build-and-outreach queue."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=2.7",
+    "pyyaml>=6.0",
+    "httpx>=0.27",
+    "tenacity>=8.3",          # exponential backoff on 429s from free-tier retrieval APIs
+    "rapidfuzz>=3.9",         # fuzzy slug/name matching for the Composio catalog diff
+    "structlog>=24.1",        # structured JSON run log — this log is evidence
+    "python-dotenv>=1.0",
+    "google-genai>=0.8",      # extractor: Gemini structured output (response_schema)
+    "anthropic>=0.40",        # extractor (alt provider): forced tool_use
+    "openai>=1.40",           # critic via OpenRouter (OpenAI-compatible endpoint), a *different* vendor
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.2",
+    "pytest-asyncio>=0.23",
+]
+
+[project.scripts]
+research = "research.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/research"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+asyncio_mode = "auto"
+testpaths = ["tests"]
